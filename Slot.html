@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Slot</title>
+</head>
+<body>
+
+<div id="vue">
+    <todo>
+        <todo-title slot="todo-title" title="秦老师系列课程"></todo-title>
+        <todo-items slot="todo-items" v-for="(item, index) in todoItems" v-bind:_item="item"
+                    v-bind:idx="index">
+        </todo-items>
+    </todo>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+<script type="text/javascript">
+    Vue.component('todo', {
+        template:
+            '<div>' +
+                '<slot name="todo-title"></slot>' +
+                '<ul>' +
+                    '<slot name="todo-items"></slot>' +
+                '</ul>' +
+            '</div>'
+    });
+
+    Vue.component('todo-title', {
+        props: ['title'],
+        template: '<div>{{title}}</div>'
+    });
+
+    //这里的index,就是数组的下标,使用for循环遍历的时候,可以循环出来!
+    Vue.component('todo-items', {
+        props: ['_item', 'idx'],
+        template: '<li>{{idx + 1}}. {{_item}}</li>'
+    });
+
+    var vm = new Vue({
+        el: '#vue',
+        data: {
+            todoItems: ['狂神说Java', '狂神说运维', '狂神说前端']
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Attributes</title>
+</head>
+<body>
+
+<div id="vue">
+    <div>
+        <h1 v-if="message === 'A'">A</h1>
+        <h1 v-else-if="message === 'B'">B</h1>
+        <h1 v-else>C</h1>
+    </div>
+    <br/>
+
+    <div>
+        <li v-for="(item, index) in items">{{index}}. {{item.message}}</li>
+    </div>
+    <br/>
+
+    <div>
+        <!--在这里我们使用了 v-on 绑定了 click 事件 并指定了名为 sayHi 的方法 -->
+        <button v-on:click="sayHi">点我</button>
+        <!-- v-on 指令的简写形式 @ -->
+        <button @click="sayHi">点我</button>
+    </div>
+    <br/>
+
+    <div>
+        <!-- v-bind:value只能进行单向的数据渲染 -->
+        <input type="text" v-bind:value="searchMap.keyWord">
+    </div>
+    <br/>
+
+    <div>
+        <!-- v-model 可以进行双向的数据绑定 -->
+        <input type="text" v-model="searchMap.keyWord">
+        <p>您要查询的是：{{searchMap.keyWord}}</p>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#vue',
+        data: {
+            message: 'D',
+            items: [
+                {message: '狂神说Java'},
+                {message: '狂神说前端'}
+            ],
+            searchMap: {
+                keyWord: 'kuangshen'
+            }
+        },
+        // 方法必须定义在 Vue 实例的 methods 对象中
+        methods: {
+            sayHi: function () {
+                // `this` 在方法里指向当前 Vue 实例
+                alert(this.message);
+            }
+        }
+    });
+</script>
+</body>
+</html>
