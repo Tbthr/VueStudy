@@ -8,6 +8,7 @@
 
 <div id="vue">
     <div>
+        <!-- 三个等号，表示绝对等于（数据、类型都相等）-->
         <h1 v-if="message === 'A'">A</h1>
         <h1 v-else-if="message === 'B'">B</h1>
         <h1 v-else>C</h1>
@@ -15,12 +16,13 @@
     <br/>
 
     <div>
+        <!-- items 是数组，item 是遍历的元素名称，index 是遍历的序号 -->
         <li v-for="(item, index) in items">{{index}}. {{item.message}}</li>
     </div>
     <br/>
 
     <div>
-        <!--在这里我们使用了 v-on 绑定了 click 事件 并指定了名为 sayHi 的方法 -->
+        <!-- 在这里我们使用了 v-on 绑定了 click 事件 并指定了名为 sayHi 的方法 -->
         <button v-on:click="sayHi">点我</button>
         <!-- v-on 指令的简写形式 @ -->
         <button @click="sayHi">点我</button>
@@ -28,13 +30,19 @@
     <br/>
 
     <div>
-        <!-- v-bind:value只能进行单向的数据渲染 -->
+        <!-- v-bind:value 只能进行单向的数据渲染，可简写为":value="xxx" -->
         <input type="text" v-bind:value="searchMap.keyWord">
     </div>
     <br/>
 
     <div>
         <!-- v-model 可以进行双向的数据绑定 -->
+        <!--
+            值得注意的是，我们所说的数据双向绑定，一定是对于 UI 控件来说的，非 UI 控件不会涉及到数据双向绑定。
+            对于我们处理表单，Vue.js 的双向数据绑定用起来就特别舒服了。
+            你可以用 v-model 指令在表单 <input>、<textarea> 及 <select> 元元素上创建双向数据绑定。
+            它会根据控件类型自动选取正确的方法来更新元素。
+        -->
         <input type="text" v-model="searchMap.keyWord">
         <p>您要查询的是：{{searchMap.keyWord}}</p>
     </div>

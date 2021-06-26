@@ -2,30 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Emit</title>
+    <title>Slot and Emit</title>
 </head>
 <body>
 
 <div id="vue">
-    <todo>
-        <todo-title slot="todo-title" title="秦老师系列课程"></todo-title>
+    <todo-title slot="todo-title" title="秦老师系列课程"></todo-title>
+    <ul>
         <todo-items slot="todo-items" v-for="(item, index) in todoItems" v-bind:_item="item"
                     v-bind:idx="index" v-on:rm="removeTodoItems(index)">
         </todo-items>
-    </todo>
+    </ul>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
 <script type="text/javascript">
-    Vue.component('todo', {
-        template:
-            '<div>' +
-            '<slot name="todo-title"></slot>' +
-            '<ul>' +
-            '<slot name="todo-items"></slot>' +
-            '</ul>' +
-            '</div>'
-    });
 
     Vue.component('todo-title', {
         props: ['title'],

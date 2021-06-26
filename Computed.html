@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Computed</title>
+</head>
+<body>
+
+<div id="app">
+    <!--
+        一个是方法，一个是属性，两种方式的最终结果确实是完全相同的。
+        然而，不同的是计算属性是基于它们的「响应式依赖」进行缓存的。只在相关响应式依赖发生改变时它们才会重新求值。
+        这就意味着只要 message 还没有发生改变，多次访问计算属性会立即返回之前的计算结果，而不必再次执行函数。
+    -->
+
+    计算属性 是能够将计算结果缓存起来的属性，即初次得到时需要进行计算，之后便可以直接读取缓存，仅当
+    -->
+    <p>当前时间的方法：{{fun_currentTime()}}</p>
+    <p>当前时间的计算属性：{{computed_currentTime}}</p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+<script>
+
+    var vue = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue'
+        },
+        methods: {
+            fun_currentTime: function () {
+                return Date.now();
+            }
+        },
+        computed: {
+            // 这是一个属性, 不是方法
+            computed_currentTime: function () {
+                this.message; // 如果把这一行去掉，则 computed_currentTime 不再变化，因为它不再依赖任何数据！
+                return Date.now();
+            }
+        }
+    }) </script>
+</body>
